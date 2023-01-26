@@ -1,4 +1,8 @@
 def reduce(matrix = 0):
+    if matrix == 0:
+        pre_defined_matrix = 0
+    else:
+        pre_defined_matrix = matrix
     if __name__ == "__main__":
         step_mode = 1
     else:
@@ -183,14 +187,11 @@ def reduce(matrix = 0):
                 i += 1
 
 
-
+                                                                          
     ##Options
     import sys
     dev_mode = 0 #Gives even more information. Useless for someone who just wants to use the tool
     digits = 3 #These do NOT change the math. Only displayed digits
-
-    "Leave at 0 for inputting the matrix in manually. Entering a matrix, skips this step and sets step_mode to 1"
-    pre_defined_matrix = 0
 
 
 
