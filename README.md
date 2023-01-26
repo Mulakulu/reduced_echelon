@@ -11,6 +11,7 @@ Digits shown does not change any of the math.
 You can use the program externally for simplifying matrixes, just by importing it and writig something like:
 
 import reduced_echelon
+
 new_matrix = reduced_echelon.reduce(old_matrix)
 
 The above code will return the reduced form of the matrix in decimal form. It skips the fraction calculation for speed and simplicity. 
