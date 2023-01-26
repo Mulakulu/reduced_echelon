@@ -1,4 +1,4 @@
-def reduce(matrix = 0):
+def reduce(matrix = 0,fractionize = False):
     if matrix == 0:
         pre_defined_matrix = 0
     else:
@@ -187,8 +187,7 @@ def reduce(matrix = 0):
                 i += 1
 
 
-                                                                          
-    ##Options
+
     import sys
     dev_mode = 0 #Gives even more information. Useless for someone who just wants to use the tool
     digits = 3 #These do NOT change the math. Only displayed digits
@@ -249,10 +248,12 @@ def reduce(matrix = 0):
     for i in range(0,len(multiplier)):
         multiplier_simplified *= multiplier[i]
     if dev_mode == 1: print(f"Final factors for simplifying {multiplier_simplified}\n")
-    if step_mode == 1: 
-        fractionify()
-        print_nice_matrix()
-    return matrix
+    if step_mode == 1 or fractionize == True: fractionify()
+    if step_mode == 1: print_nice_matrix()
+    if fractionize == 1:
+        return [nice_matrix,multiplier_simplified]
+    else:
+        return matrix
 
 if __name__ == "__main__":
     while True == True:
