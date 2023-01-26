@@ -24,4 +24,5 @@ See example_echelon.py for an example
 
 # Future plans
 making find_inverted_matrix into an importable package
+
 making a standalone version of find_inverted_matrix
