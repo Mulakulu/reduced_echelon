@@ -93,6 +93,7 @@ def inverse(matrix = 0):
         for i in range(0,(width-height)*height):
             matrix_representation[-i-1][-i-2] = 1
             matrix_representation[-i-1][-1] = 1
+        print(f"Elements in rows past row {height} are variables that has been defined as 1. \nThis is not a unique answer.\n")
     for i in range(0,height):
         for j in range(0,height):
             if i == j:
