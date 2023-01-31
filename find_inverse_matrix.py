@@ -63,7 +63,8 @@ def inverse(matrix = 0):
             except KeyboardInterrupt:
                 sys.exit()
         matrix = [ [0] * width for i in range(height) ]
-        print_matrix(matrix,"\nMatrix shape\n")
+        print_matrix(matrix,"\nMatrix shape")
+        print()
         for y in range(0,height):
             for x in range(0,width):
                 success = 0
@@ -76,8 +77,8 @@ def inverse(matrix = 0):
                         success = 0
                     except KeyboardInterrupt:
                         sys.exit()
+        print_matrix(matrix,"\nMatrix input")
         print()
-        print_matrix(matrix,"Matrix input\n")
     else: #Runs if matrix is pre-defined
         matrix = pre_defined_matrix
         width = len(matrix[0])
