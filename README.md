@@ -7,6 +7,8 @@ Digits shown does not change any of the math.
 # Use find_inverse_matrix.py
 You can open find_inverse_matrix.py as is so long as you have reduce_echelon.py in the same folder. When opened, it asks for the matrix you want to invert and it is as simple as that. For square matrixes, it will return the unique inverted matrix if there is one, for m>n matrixes, it returns one of infinite valid inverted matrixes where it defined undefined variables as 1 and for n>m matrixes, it will try to find a unique inverted matrix, although I don't believe there are any.
 
+# Use find_inverse_matrix_(standalone).py
+Same as find_inverse_matrix.py but you don't need reduce_echelon.py in the same folder
 
 # Import reduce_echelon to another program
 You can use the program externally for simplifying matrixes, just by importing it and writig something like:
@@ -24,5 +26,3 @@ See example_echelon.py for an example
 
 # Future plans
 making find_inverted_matrix into an importable package
-
-making a standalone version of find_inverted_matrix
