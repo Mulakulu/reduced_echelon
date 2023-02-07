@@ -30,6 +30,18 @@ def inverse(matrix = 0):
                     print(f"{' '*(longest_string[temp_width-1]-len(printed_matrix[y][temp_width-1]))}{printed_matrix[y][temp_width-1]}]\n",end="")
                 else:
                     print(f"{' '*(longest_string[temp_width-1]-len(str(round(printed_matrix[y][temp_width-1],digits))))}{str(round(printed_matrix[y][temp_width-1],digits))}]\n",end="")
+    def try_int(num): #Turns numbers like 4.0 to 4
+        if is_whole(num):
+            return int(round(num))
+        else:
+            if abs(int(round(num*10000))-num*10000)<0.01:
+                num = round(num*10000)/10000
+            return num
+    def is_whole(num): #Tests if a float is close enough to a whole number to count as one
+        if abs(int(round(num))-num) < 0.0000001:
+            return True
+        else:
+            return False
     def clean_numbers(): #Function that cleans up -0.0's
         for y in range(0,height):
             for x in range(0,width):
@@ -39,6 +51,24 @@ def inverse(matrix = 0):
                     matrix[y][x] = int(round(matrix[y][x]))
                 if str(matrix[y][x]) == "-0.0": matrix[y][x] = 0
                 if str(matrix[y][x]) == "0.0": matrix[y][x] = 0
+    def matrix_multiplication(matrix1,matrix2):
+        if len(matrix2) == len(matrix1[0]):
+            pass
+        else:
+            if len(matrix1) == len(matrix2[0]):
+                temp_matrix = matrix1
+                matrix1 = matrix2
+                matrix2 = temp_matrix
+            else: return 0
+        new_matrix = [ [0] * len(matrix2[0]) for i in range(len(matrix1)) ]
+        for i in range(0,len(new_matrix)):
+            for j in range(0,len(new_matrix[0])):
+                sum = 0
+                for k in range(0,len(matrix2)):
+                    sum += matrix1[i][k]*matrix2[k][j]
+                new_matrix[i][j] = try_int(sum)
+        return new_matrix
+
 
 
 
@@ -47,7 +77,9 @@ def inverse(matrix = 0):
     import reduced_echelon as re
     digits = 3 #These do NOT change the math. Only displayed digits
 
-
+    #matrix1 = [[1,0],[0,1]]
+    #matrix2 = [[1,0],[0,1]]
+    #print(matrix_multiplication(matrix1,matrix2))
 
     if pre_defined_matrix == 0 and step_mode == 1: #Define variables and matrix
         print()
@@ -56,7 +88,11 @@ def inverse(matrix = 0):
             success = 1
             try:
                 width = int(input("How wide is the matrix?: "))    
+                if width == 0:
+                    width = int("meh")
                 height = int(input("How tall is the matrix?: "))
+                if height == 0:
+                    height = int("meh")
             except ValueError:
                 print("Invalid input. Try again")
                 success = 0
@@ -93,30 +129,35 @@ def inverse(matrix = 0):
         for i in range(0,(width-height)*height):
             matrix_representation[-i-1][-i-2] = 1
             matrix_representation[-i-1][-1] = 1
-        print(f"Elements in rows past row {height} are variables that has been defined as 1. \nThis is not a unique answer.\n")
+        print(f"The elements in rows past row {height} are variables that has been defined as 1. \nThis is not a unique answer.\n")
     for i in range(0,height):
         for j in range(0,height):
             if i == j:
                 matrix_representation[i*height+j][-1] = 1
-    #print_matrix(matrix_representation,"Matrix representation")
+
     new_matrix = re.reduce(matrix_representation,True)[0]
-    #print(new_matrix)
-    success = 1
-    for i in range(0,max(width,height)*height): #Check for 0 = 1
-        is_not_zero = 0
-        for j in range(0,width*height-1):
-            if new_matrix[i][j] != "0": 
-                is_not_zero = 1
-        if is_not_zero == 0 and new_matrix[i][-2] == "1" and new_matrix[i][-1] == "0":
-            success = 0
-    if success == 0:
-        print("There is no inverted matrix of the inputed matrix")
-    else:
-        output_matrix = [[0] * height for i in range(width)]
-        for i in range(0,height):
-            for j in range(0,width):
-                output_matrix[j][i] = new_matrix[j*height+i][-1]
+
+    new_float_matrix = re.reduce(matrix_representation,False)
+
+    output_matrix = [[0] * height for i in range(width)]
+    for i in range(0,height):
+        for j in range(0,width):
+            output_matrix[j][i] = new_matrix[j*height+i][-1]
+    
+    output_float_matrix = [[0] * height for i in range(width)]
+    for i in range(0,height):
+        for j in range(0,width):
+            output_float_matrix[j][i] = try_int(new_float_matrix[j*height+i][-1])
+
+    #Generate itentity matrix
+    identity = [ [0] * height for i in range(height)]
+    for i in range(0,height):
+        identity[i][i] = 1
+
+    if matrix_multiplication(matrix,output_float_matrix) == identity:
         print_matrix(output_matrix,"Inverse matrix")
+    else:
+        print("The program was unable to find an inverse")
 
 if __name__ == "__main__":
     while True == True:

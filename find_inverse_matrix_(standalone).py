@@ -96,15 +96,23 @@ def inverse(matrix = 0):
                 matrix_representation[i*height+j][-1] = 1
     #print_matrix(matrix_representation,"Matrix representation")
     new_matrix = reduce(matrix_representation,True)[0]
-    #print(new_matrix)
+    print(new_matrix)
     success = 1
-    for i in range(0,max(width,height)*height): #Check for 0 = 1
+    for i in range(0,max(width,height)*height): #Check for 0 = 1 in the new matrix
         is_not_zero = 0
         for j in range(0,width*height-1):
             if new_matrix[i][j] != "0": 
                 is_not_zero = 1
         if is_not_zero == 0 and new_matrix[i][-2] == "1" and new_matrix[i][-1] == "0":
             success = 0
+    for i in range(0,max(width,height)*height): #Check for 0 = 1 in the matrix representation (overwrites previous function)
+        is_not_zero = 0
+        for j in range(0,width*height-1):
+            print(f"{i} {j} {matrix_representation[i][j]}")
+            if matrix_representation[i][j] != "0": 
+                is_not_zero = 1
+        if is_not_zero == 0 and matrix_representation[i][-2] == "1" and matrix_representation[i][-1] == "0":
+            success = 1
     if success == 0:
         print("There is no inverted matrix of the inputed matrix")
     else:
