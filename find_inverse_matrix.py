@@ -69,12 +69,15 @@ def inverse(matrix = 0):
                 new_matrix[i][j] = try_int(sum)
         return new_matrix
 
-
-
-
     ##Options
     import sys
-    import reduced_echelon as re
+    try: 
+        import reduced_echelon as re
+    except ImportError: 
+        print("reduced_echelon.py was not able to be imported")
+        wait = input("")
+        sys.exit()
+
     digits = 3 #These do NOT change the math. Only displayed digits
 
     #matrix1 = [[1,0],[0,1]]
